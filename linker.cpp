@@ -32,6 +32,11 @@ void pass1(ifstream& f) {
             Symbol sym = string(readSymbol(f));
             int val = readInt(f);
 
+            if(val == -1) {
+                __parseerror(0);
+                exit(EXIT_FAILURE);
+            }
+
             // see rule 2
             if(symbol_to_index.find(sym) == symbol_to_index.end()) {
                 symbol_to_index[sym] = symbol_table.size();
@@ -49,12 +54,21 @@ void pass1(ifstream& f) {
             __parseerror(5);
             exit(EXIT_FAILURE);
         }
+        
+        if(usecount == -1) {
+            __parseerror(0);
+            exit(EXIT_FAILURE);
+        }
 
         for(int i = 0; i < usecount; i++) {
             Symbol sym = string(readSymbol(f));
         }
 
         int instcount = readInt(f);
+        if(instcount == -1) {
+            __parseerror(0);
+            exit(EXIT_FAILURE);
+        }
         if(base_addr + instcount > MACHINE_SIZE) {
             __parseerror(6);
             exit(EXIT_FAILURE);
@@ -65,6 +79,10 @@ void pass1(ifstream& f) {
         for(int i = 0; i < instcount; i++) {
             char addrmode = readIAER(f);
             int instr = readInt(f);
+            if(instr == -1) {
+                __parseerror(0);
+                exit(EXIT_FAILURE);
+            }
             //TODO: error check in pass2
         }
 

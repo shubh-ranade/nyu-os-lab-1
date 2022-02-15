@@ -23,7 +23,8 @@ void getStream(ifstream& f) {
     if(f.gcount() > 0)
         linenum++;
 
-    eof = f.eof();
+    if(f.eof())
+        eof = true;
 }
 
 // tokens returned by this function are null-terminated
@@ -69,8 +70,16 @@ int readInt(ifstream& f) {
     char* tok = getToken(f);
     int t = 0;
 
+    // return -1 when eof reached.
+    // tok == false and eof == true happen at the same time
     if(!tok && eof) {
         return -1;
+    }
+
+    //this is redundant
+    else if(!tok) {
+        __parseerror(0);
+        exit(EXIT_FAILURE);
     }
 
     while(tok[t]) {
@@ -95,7 +104,7 @@ char* readSymbol(ifstream& f) {
     char* tok = getToken(f);
     int t = 0;
 
-    if(!tok && eof) {
+    if(!tok) {
         __parseerror(1);
         exit(EXIT_FAILURE);
     }
@@ -126,7 +135,7 @@ char readIAER(ifstream& f) {
     // cout << "addrmode in\n";
     char* tok = getToken(f);
     
-    if(!tok && eof) {
+    if(!tok) {
         __parseerror(2);
         exit(EXIT_FAILURE);
     }
