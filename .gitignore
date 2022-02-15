@@ -1,0 +1,14 @@
+*.o
+*.txt
+
+gen_inputs/*
+inputs/*
+tests/*
+linker-out/*
+outputs/*
+gen_outs/*
+
+tokenizer
+test_tokenizer
+linker
+test_linker
