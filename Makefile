@@ -1,4 +1,4 @@
-CXXFLAGS=-g
+CXXFLAGS=-g -std=c++11
 CXX=g++
 
 test_tokenizer: tokenizer.hpp errors_warnings.cpp tokenizer.cpp test_tokenizer.cpp
