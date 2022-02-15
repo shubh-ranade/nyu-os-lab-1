@@ -1,6 +1,9 @@
 *.o
 *.txt
 
+input*
+out*
+
 gen_inputs/*
 inputs/*
 tests/*
